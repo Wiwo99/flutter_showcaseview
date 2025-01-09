@@ -612,20 +612,22 @@ class _ShowcaseState extends State<Showcase> {
     }
   }
 
-  void _scrollIntoView() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      final keyContext = widget.key.currentContext;
-      if (!mounted || (keyContext?.mounted ?? true)) return;
-      setState(() => _isScrollRunning = true);
-      await Scrollable.ensureVisible(
-        keyContext!,
-        duration: showCaseWidgetState.widget.scrollDuration,
-        alignment: widget.scrollAlignment,
-      );
-      if (!mounted) return;
-      setState(() => _isScrollRunning = false);
-    });
-  }
+void _scrollIntoView() {
+  WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    final keyContext = widget.key.currentContext;
+    if (!mounted || keyContext == null || !keyContext.mounted) return;
+
+    setState(() => _isScrollRunning = true);
+    await Scrollable.ensureVisible(
+      keyContext,
+      duration: showCaseWidgetState.widget.scrollDuration,
+      alignment: widget.scrollAlignment,
+    );
+    if (!mounted) return;
+    setState(() => _isScrollRunning = false);
+  });
+}
+
 
   @override
   Widget build(BuildContext context) {
