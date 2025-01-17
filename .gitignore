@@ -61,6 +61,3 @@ ios/Runner.xcworkspace/xcshareddata/
 example/ios/Flutter/flutter_export_environment.sh
 flutter_showcaseview.iml
 pubspec.lock
-
-# FVM Version Cache
-.fvm/
